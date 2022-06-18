@@ -1,0 +1,33 @@
+version: '3.5'
+
+services:
+  lumen:
+    container_name: ciu_bradev
+    ports:
+      - "8009:8009"
+    volumes:
+      - .:/var/www/html
+      - ./vendor:/var/www/html/vendor/
+    build: .
+    command: php -S lumen:8000 -t public
+    restart: always
+
+  db:
+    container_name: mysql
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lumen
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: travellist-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
