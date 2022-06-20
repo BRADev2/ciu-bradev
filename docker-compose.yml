@@ -4,23 +4,23 @@ services:
   lumen:
     container_name: ciu_bradev
     ports:
-      - "8009:8009"
+      - "8001:8001"
     volumes:
       - .:/var/www/html
       - ./vendor:/var/www/html/vendor/
     build: .
-    command: php -S lumen:8000 -t public
+    command: php -S lumen:8001 -t public
     restart: always
 
   db:
     container_name: mysql
-    image: mysql:5.7
+    image: mariadb
     restart: always
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: lumen
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: ciu_bradev
 
   nginx:
     image: nginx:1.17-alpine
