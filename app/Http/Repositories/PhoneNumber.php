@@ -5,7 +5,7 @@ namespace App\Http\Repositories;
 use Illuminate\Http\Request;
 use App\models\User;
 
-class AddressRepository extends Repository
+class PhoneNumberRepository extends Repository
 {
     protected $model;
     
@@ -14,7 +14,7 @@ class AddressRepository extends Repository
      *
      * @return void
      */
-    public function __construct(Address $address) {
-        $this->model = $address;
+    public function __construct(PhoneNumber $phoneNumber) {
+        $this->model = $phoneNumber;
     }
 }
