@@ -13,16 +13,16 @@ class Repository
         return $this->model->find($id);
     }
 
-    public function index($wheres) {
+    public function show($wheres) {
         return $this->model->where($wheres)->get();
     }
 
-    public function update($wheres, $data) {
-        return $this->model->where($wheres)->update($data);
+    public function update($id, $data) {
+        return $this->model->where("id", $id)->update($data);
     }
 
-    public function delete($wheres, $data) {
-        return $this->model->delete($wheres);
+    public function delete($id) {
+        return $this->model->delete("id", $id);
     }
 
     public function store($data) {
