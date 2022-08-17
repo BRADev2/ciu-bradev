@@ -91,7 +91,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id) {
         try {
-            $this->userRepository->update($id,$request);
+            $this->userRepository->update($id, $request);
             return response()->json("Dados do usuário atualizados com sucesso.", 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => trans($th->getMessage())], 404);
@@ -104,7 +104,12 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function destroy(Request $request) {
-        
+    public function destroy($id) {
+        try {
+            $this->userRepository->delete($id);
+            return response()->json("Dados do usuário atualizados com sucesso.", 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => trans($th->getMessage())], 404);
+        }
     }
 }

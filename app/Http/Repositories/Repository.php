@@ -21,8 +21,8 @@ class Repository
         return $this->model->where("id", $id)->update($data);
     }
 
-    public function delete($wheres, $data) {
-        return $this->model->delete($wheres);
+    public function delete($id) {
+        return $this->model->where("id", $id)->delete();
     }
 
     public function store($data) {
