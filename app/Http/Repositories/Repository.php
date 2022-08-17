@@ -14,20 +14,15 @@ class Repository
     }
 
     public function index($wheres) {
-        $wheres = is_array($wheres) ? $wheres : $wheres->all();
-        if($wheres) {
-            $this->model = $this->model->where($wheres);
-        }
-        return $this->model->get();
+        return $this->model->where($wheres)->get();
     }
 
     public function update($id, $data) {
-        $data = is_array($data) ? $data : $data->all();
-        return $this->model->where('id', $id)->update($data);
+        return $this->model->where("id", $id)->update($data);
     }
 
-    public function delete($id) {
-        return $this->model->find($id)->delete();
+    public function delete($wheres, $data) {
+        return $this->model->delete($wheres);
     }
 
     public function store($data) {

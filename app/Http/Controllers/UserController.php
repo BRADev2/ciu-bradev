@@ -27,7 +27,7 @@ class UserController extends Controller
     public function index(Request $request) {
         try {
             $user = $this->userRepository->index($request);
-            return response()->json($user, 200);
+            response()->json([$user], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => trans($th->getMessage())], 404);
         }
@@ -52,7 +52,7 @@ class UserController extends Controller
     public function store(Request $request) {
         try {
             $user = $this->userRepository->store($request);
-            return response()->json($user, 200);
+            response()->json([$user], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => trans($th->getMessage())], 404);
         }
@@ -64,10 +64,10 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function show($id) {
+    public function show(Request $request) {
         try {
-            $user = $this->userRepository->find($id);
-            return response()->json($user, 200);
+            $user = $this->userRepository->find($request);
+            return response()->json([$user], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => trans($th->getMessage())], 404);
         }
@@ -91,8 +91,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id) {
         try {
-            $this->userRepository->update($id, $request);
-            return response()->json(["Usuario atualizado com sucesso"], 200);
+            $this->userRepository->update($id,$request);
+            return response()->json("Dados do usuário atualizados com sucesso.", 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => trans($th->getMessage())], 404);
         }
@@ -104,13 +104,7 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function destroy($id) {
-        try {
-            $this->userRepository->delete($id);
-            return response()->json(["Usuario deletado"], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['error' => trans($th->getMessage())], 404);
-        }
+    public function destroy(Request $request) {
         
     }
 }
